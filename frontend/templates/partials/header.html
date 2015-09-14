@@ -1,9 +1,12 @@
-<header>
+<header ng-controller="usersController as users">
   <nav>
     <ul>
       <li><a href="/#/">Home</a></li>
       <li><a href="/#/movies">movies</a></li>
-      <li><a href="/#/signup">Create a user</a></li>
+      <li ng-hide="users.isLoggedIn()"><a href="/#/signup">Sign Up</a></li>
+      <li ng-hide="users.isLoggedIn()"><a href="/#/login">Login</a></li>
+      <li ng-show="users.isLoggedIn()"><a ng-click="users.disappear()">Log Out</a></li>
     </ul>
   </nav>
 </header>
+

@@ -1,1 +1,16 @@
-<h1>signup</h1>
+<section ng-hide="users.isLoggedIn()">
+  <h3>Join</h3>
+  <form id="join" ng-hide="users.isLoggedIn()" ng-submit="users.join()">
+    <label for="full_name">full name</label>
+    <input type="text" name="full_name" placeholder="full_name" ng-model="users.user.full_name">
+
+    <label for="email">Email</label>
+    <input type="email" name="email" placeholder="email" ng-model="users.user.email">
+
+
+    <label for="password">Password</label>
+    <input type="password" name="password" placeholder="Password" ng-model="users.user.password">
+
+    <input type="submit" value="Access">
+  </form>
+</section>

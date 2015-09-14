@@ -24,7 +24,7 @@ var signup = function(req, res, next) {
 
 var login =  function(req, res, next) {
   User.findOne({
-    full_name: req.body.full_name
+    email: req.body.email
   }, function(err, user) {
     if (err) return res.status(500).send(err);
 

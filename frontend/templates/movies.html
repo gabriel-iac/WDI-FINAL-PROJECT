@@ -1,0 +1,31 @@
+test
+<section class="container" ng-controller="MovieController as films">
+
+<form ng-submit="submit()">
+  Enter text and hit enter:
+  <input type="text" ng-model="text" name="text" />
+  <input type="submit" id="submit" value="Submit" />
+</form>
+<div class="row col-md-4  pull-left list-inline" ng-repeat="movie in films.allMovies">
+
+  <div class="col-md-12"><strong>Title:</strong> {{ movie.title}}</div>
+  <div class="col-md-12"><img ng-src="https://image.tmdb.org/t/p/w300{{movie.poster_path}}"></div>
+  <div class="col-md-12"><strong>Type:</strong> {{ movie.media_type}}</div>
+  <div class="col-md-12"><strong>Overview:</strong> {{ movie.overview}}</div>
+  <div class="col-md-12"><strong>Popularity:</strong> {{ movie.popularity}}</div>
+  <div class="col-md-12"><strong>Vote average:</strong> {{ movie.vote_average}}</div>
+  <div class="col-md-12"><strong>vote count:</strong>  {{ movie.vote_count}} </div>
+  <div class="col-md-12"> <strong>Movie relese date:</strong> {{ movie.release_date}}</div>
+  <div class="col-md-12"> <strong>Origin Country:</strong> {{ movie.origin_country}}</div>
+  <div class="col-md-12"> <strong>Original language:</strong> {{ movie. original_language}}</div>
+
+  
+  <div>
+    <div>
+   <!--   <video class="col-md-12"  preload="metadata"  controls="controls" preload="metadata">
+       <source ng-src="{{ video.video_url}}" type="video/mp4"  />
+     </video> -->
+   </div>
+ </div>
+</div>
+</section>
