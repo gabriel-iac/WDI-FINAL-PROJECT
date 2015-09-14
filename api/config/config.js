@@ -1,3 +1,4 @@
 module.exports = {
-  'secret': 'wearewdi14andwearethebesthunters'
+  'secret': 'wdifinalprojectyay',
+  'database': 'mongodb://localhost:27017/final-project'
 };
