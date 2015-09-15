@@ -7,10 +7,12 @@ var getMovies = function(req,res){
  
   MovieDB.searchMulti({query: req.query.query }, function(err, result){
       if (err) {
+        
         res.status(404).send(err);
       }
-    
+ 
     res.status(200).send(result.results);
+  
   })
 }
 

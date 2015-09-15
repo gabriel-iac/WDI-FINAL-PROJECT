@@ -28,12 +28,24 @@ function MovieController($resource){
   });
 
   self.onFilter = function(input) {
-    alert(input)
+    // alert(input)
+    if(input){
     Movie.search({
        query: input  
+
     }, function(result){
+      if (result) {
+        console.log(result)
+    }else{
       self.allMovies = result
-    });
+    }
+    })
+    }else{
+      self.allMovies = [""];
+      result = "";
+      self.allMovies = result
+    }
+
   }
 
   function submit() {
