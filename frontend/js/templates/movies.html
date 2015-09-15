@@ -1,12 +1,10 @@
 <section class="container" ng-controller="MovieController as films">
 
   <form >
-    <input ng-change="films.onFilter(search)" type="text" ng-model="search" name="text" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 200, 'blur': 0 } }" />
+    <input  ng-change="films.onFilter(search)" type="text" ng-model="search" name="text" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 300, 'blur': 0 } }" />
     <!-- <input type="submit" value="submit"> -->
   </form>
-
   <hr/>
-  
   <a href="" ng-click="films.predicate=''">unsorted</a>
   <table class="friend">
     <tr>
@@ -29,20 +27,21 @@
     </tr>
   </table>
 
-  <div class="row col-md-4  pull-left list-inline" ng-if="movie.poster_path && movie.release_date" ng-repeat="movie in films.allMovies | orderBy:films.predicate:false">
+  <div class="row col-md-4  pull-left list-inline" ng-if="movie.poster_path && movie.release_date && movie.overview" ng-repeat="movie in films.allMovies | orderBy:films.predicate:false">
   <div class="card">
     <img class="card-img-top" ng-src="https://image.tmdb.org/t/p/w300{{movie.poster_path}}" alt="Card image cap">
     <div class="card-block">
-      <h4 ng-if="movie.title" class="card-title">{{ movie.title}}</h4>
-      <h4 ng-if="movie.name" class="card-title">{{ movie.name}}</h4>
-      <h5 class="card-text"><em>{{ movie.media_type}}</em></h5>
-      <p class="card-text">{{ movie.overview}}</p>
+      <h5 ng-if="movie.title" class="card-title">{{ movie.title}}</h5>
+      <h5 ng-if="movie.name" class="card-title">{{ movie.name}}</h5>
+      <h6 class="card-text"><em>{{ movie.media_type}}</em></h6>
+      <p class="card-text overview" >{{ movie.overview | limitTo: 300}}</p>
       <p class="card-text">Popularity: {{ movie.popularity}}</p>
+      <p class="card-text">Rating: {{ movie.vote_average}}</p>
       <p class="card-text">Release Date: {{ movie.release_date}}</p>
       <a href="#" class="btn btn-primary">Button</a>
     </div>
   </div>
-    <div ng-if="movie.title" class="col-md-12"><strong>Title:</strong> {{ movie.title}}</div>
+<!--     <div ng-if="movie.title" class="col-md-12"><strong>Title:</strong> {{ movie.title}}</div>
     <div ng-if="movie.name" class="col-md-12"><strong>Title:</strong> {{ movie.name}}</div>
     <div class="col-md-12"><img ng-src="https://image.tmdb.org/t/p/w300{{movie.poster_path}}"></div>
     <div class="col-md-12"><strong>Type:</strong> {{ movie.media_type}}</div>
@@ -53,13 +52,13 @@
     <div class="col-md-12"> <strong>Movie relese date:</strong> {{ movie.release_date}}</div>
     <div class="col-md-12"> <strong>Origin Country:</strong> {{ movie.origin_country}}</div>
     <div class="col-md-12"> <strong>Original language:</strong> {{ movie.original_language}}</div>  
-    <div class="col-md-12"> <strong>Genres Id:</strong> {{ movie.genre_ids}}</div>  
-    <div>
+    <div class="col-md-12"> <strong>Genres Id:</strong> {{ movie.genre_ids}}</div>  --> 
+ <!--    <div>
       <div>
-   <!--   <video class="col-md-12"  preload="metadata"  controls="controls" preload="metadata">
+     <video class="col-md-12"  preload="metadata"  controls="controls" preload="metadata">
        <source ng-src="{{ video.video_url}}" type="video/mp4"  />
-     </video> -->
+     </video>
    </div>
- </div>
+ </div> -->
 </div>
 </section>

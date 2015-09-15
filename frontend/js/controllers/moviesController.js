@@ -18,7 +18,13 @@ function MovieController($resource, $filter, TokenService, Movie){
   self.allMovies = [];
   self.predicate = '-title';
   self.reverse   = true;
-  self.overviewLimit = 100;
+
+  self.limitChar = function(){
+    
+    $(".overview").text(function(index, currentText) {
+        return currentText.substr(0, 30) + '...';
+    });
+  }
 
 
   self.order = function(predicate) {
@@ -46,7 +52,7 @@ function MovieController($resource, $filter, TokenService, Movie){
   }
 
   self.getMovies();
-
+  self.limitChar();
   // console.log(result)
   // for (i=0; i < result.length; i++){
   //   var test = result[i].genre_id
