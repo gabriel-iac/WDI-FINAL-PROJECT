@@ -18,6 +18,8 @@ function MovieController($resource, $filter, TokenService, Movie){
   self.allMovies = [];
   self.predicate = '-title';
   self.reverse   = true;
+  self.overviewLimit = 100;
+
 
   self.order = function(predicate) {
     self.reverse = (self.predicate === predicate) ? !self.reverse : false;

@@ -30,6 +30,18 @@
   </table>
 
   <div class="row col-md-4  pull-left list-inline" ng-if="movie.poster_path && movie.release_date" ng-repeat="movie in films.allMovies | orderBy:films.predicate:false">
+  <div class="card">
+    <img class="card-img-top" ng-src="https://image.tmdb.org/t/p/w300{{movie.poster_path}}" alt="Card image cap">
+    <div class="card-block">
+      <h4 ng-if="movie.title" class="card-title">{{ movie.title}}</h4>
+      <h4 ng-if="movie.name" class="card-title">{{ movie.name}}</h4>
+      <h5 class="card-text"><em>{{ movie.media_type}}</em></h5>
+      <p class="card-text">{{ movie.overview}}</p>
+      <p class="card-text">Popularity: {{ movie.popularity}}</p>
+      <p class="card-text">Release Date: {{ movie.release_date}}</p>
+      <a href="#" class="btn btn-primary">Button</a>
+    </div>
+  </div>
     <div ng-if="movie.title" class="col-md-12"><strong>Title:</strong> {{ movie.title}}</div>
     <div ng-if="movie.name" class="col-md-12"><strong>Title:</strong> {{ movie.name}}</div>
     <div class="col-md-12"><img ng-src="https://image.tmdb.org/t/p/w300{{movie.poster_path}}"></div>
