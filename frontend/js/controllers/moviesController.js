@@ -19,34 +19,34 @@ function MovieController($resource){
   var Movie = $resource("http://localhost:3000/api/movies/:id",
     { id: '@_id' }, 
     { "search": {
-        method: 'GET',
-        params: {
-          query: '@query'
-        },
-        isArray: true
-      }
+      method: 'GET',
+      params: {
+        query: '@query'
+      },
+      isArray: true
+    }
   });
 
   self.onFilter = function(input) {
     // alert(input)
     if(input){
-    Movie.search({
+      Movie.search({
        query: input  
-    }, function(result){
+     }, function(result){
       self.allMovies = result
+      console.log(result)
+        self.predicate = 'title';
+              self.reverse = true;
+              self.order = function(predicate) {
+                self.reverse = (self.predicate === predicate) ? !self.reverse : false;
+                self.predicate = predicate;
+      }
     }
     )
     }else{
       self.allMovies = [];
       input = "";
-    
-    }
-    
+    }  
   }
-
-  function submit() {
-    console.log("hello")
-
-  }
-}
-// }
+  
+ }

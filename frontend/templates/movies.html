@@ -3,12 +3,34 @@
 
 
 <form >
-  <input ng-change="films.onFilter(search)" type="text" ng-model="search" name="text"  />
+  <input ng-change="films.onFilter(search)" type="text" ng-model="search" name="text" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 100, 'blur': 0 } }" />
   <!-- <input type="submit" value="submit"> -->
 </form>
+<pre>Sorting predicate = {{predicate}}; reverse = {{reverse}}</pre>
+  <hr/>
+  [ <a href="" ng-click="predicate=''">unsorted</a> ]
+  <table class="friend">
+    <tr>
+      <th>
+        <a href="" ng-click="order('title')">Title</a>
+        <span class="sortorder" ng-show="predicate === 'title'" ng-class="{reverse:reverse}"></span>
+      </th>
+      <th>
+        <a href="" ng-click="order('popularity')">Popularity</a>
+        <span class="sortorder" ng-show="predicate === 'popularity'" ng-class="{reverse:reverse}"></span>
+      </th>
+      <th>
+        <a href="" ng-click="order('vote_average')">Ratings</a>
+        <span class="sortorder" ng-show="predicate === 'vote_average'" ng-class="{reverse:reverse}"></span>
+      </th>
+    </tr>
+   </table>
 
-  <div class="row col-md-4  pull-left list-inline" ng-if="movie.poster_path" ng-repeat="movie in films.allMovies ">
-    <div class="col-md-12"><strong>Title:</strong> {{ movie.title}}</div>
+
+
+  <div class="row col-md-4  pull-left list-inline" ng-if="movie.poster_path" ng-repeat="movie in films.allMovies | orderBy:predicate:reverse">
+    <div ng-if="movie.title" class="col-md-12"><strong>Title:</strong> {{ movie.title}}</div>
+    <div ng-if="movie.name" class="col-md-12"><strong>Title:</strong> {{ movie.name}}</div>
     <div class="col-md-12"><img ng-src="https://image.tmdb.org/t/p/w300{{movie.poster_path}}"></div>
     <div class="col-md-12"><strong>Type:</strong> {{ movie.media_type}}</div>
     <div class="col-md-12"><strong>Overview:</strong> {{ movie.overview}}</div>
@@ -17,7 +39,8 @@
     <div class="col-md-12"><strong>vote count:</strong>  {{ movie.vote_count}} </div>
     <div class="col-md-12"> <strong>Movie relese date:</strong> {{ movie.release_date}}</div>
     <div class="col-md-12"> <strong>Origin Country:</strong> {{ movie.origin_country}}</div>
-    <div class="col-md-12"> <strong>Original language:</strong> {{ movie. original_language}}</div>  
+    <div class="col-md-12"> <strong>Original language:</strong> {{ movie.original_language}}</div>  
+    <div class="col-md-12"> <strong>Genres Id:</strong> {{ movie.genre_ids}}</div>  
     <div>
       <div>
    <!--   <video class="col-md-12"  preload="metadata"  controls="controls" preload="metadata">

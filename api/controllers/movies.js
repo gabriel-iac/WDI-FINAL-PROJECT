@@ -19,7 +19,6 @@ var query = [];
   })
 
 }
-
 module.exports = {
   getMovies: getMovies
 }

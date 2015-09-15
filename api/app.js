@@ -5,6 +5,7 @@ var expressJWT = require("express-jwt");
 var logger     = require('morgan');
 var bodyParser = require('body-parser');
 var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
 var config     = require('./config/config');
 var app        = express();
 var mongoose   = require('mongoose');
@@ -15,9 +16,15 @@ var secret     = config.secret;
 
 app
 .use('/api', expressJWT({secret: config.secret})
-.unless({path: ['/api/authorize', '/api/join'], method: 'post'}));
+  .unless({path: ['/api/authorize', '/api/join'], method: 'post'}));
 
-require('./config/passport')(passport);
+app.get('/api/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
+app.get('/api/auth/facebook/callback', passport.authenticate('facebook',{
+  successRedirect: '/',
+  failureRedirect: '/'
+})
+)
+require("./config/passport")(passport, FacebookStrategy)
 
 app.use(cors());
 app.use(logger('dev'));
@@ -28,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
   // Require routes
   var routes = require('./config/routes');
   app.use('/api', routes);
-
+  
   app.listen(process.env.PORT || 3000);
 
 
