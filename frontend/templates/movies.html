@@ -7,7 +7,7 @@
   <!-- <input type="submit" value="submit"> -->
 </form>
 
-  <div class="row col-md-4  pull-left list-inline" ng-repeat="movie in films.allMovies ">
+  <div class="row col-md-4  pull-left list-inline" ng-if="movie.poster_path" ng-repeat="movie in films.allMovies ">
     <div class="col-md-12"><strong>Title:</strong> {{ movie.title}}</div>
     <div class="col-md-12"><img ng-src="https://image.tmdb.org/t/p/w300{{movie.poster_path}}"></div>
     <div class="col-md-12"><strong>Type:</strong> {{ movie.media_type}}</div>
