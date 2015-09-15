@@ -11,20 +11,19 @@ angular
     $stateProvider
       .state('signup', {
         url: "/signup",
-        templateUrl: "templates/signup.html"
+        templateUrl: "js/templates/signup.html"
       })
       .state('login', {
         url: "/login",
-        templateUrl: "templates/login.html"
+        templateUrl: "js/templates/login.html"
       })
       .state('homepage', {
-        templateUrl: "templates/homepage.html",
+        templateUrl: "js/templates/homepage.html",
         url: "/"
       })
       .state('movies', {
-        templateUrl: "templates/movies.html",
+        templateUrl: "js/templates/movies.html",
         url: "/movies"
       })
-      $urlRouterProvider.otherwise('/');
-        
-      }
+      $urlRouterProvider.otherwise('/');    
+    }

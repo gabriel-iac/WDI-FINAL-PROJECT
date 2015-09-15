@@ -5,11 +5,12 @@ var getMovies = function(req,res){
  // API Key
  // MovieDB.searchMulti({query: 'Indiana Jones'}, function(err, result){
   var myquery = [];
+  
   MovieDB.searchMulti({query: req.query.query }, function(err, result){
     if (err) {
-
       res.status(404).send(err);
     }
+
     res.status(200).send(result.results);
     
     // for (var i = 0, len = result.results.length; i < len; i++) {

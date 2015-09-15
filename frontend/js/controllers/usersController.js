@@ -2,8 +2,8 @@ angular
   .module('final-project')
   .controller('usersController', UserController)
 
-UserController.$inject = ['User','TokenService']
-function UserController(User, TokenService) {
+UserController.$inject = ['User','TokenService', '$state']
+function UserController(User, TokenService, $state) {
   var self = this;
 
   self.all    = [];
@@ -19,15 +19,22 @@ function UserController(User, TokenService) {
   }
 
   self.authorize = function() {
-    User.authorize(self.user, showMessage);
+    User.authorize(self.user, function(res){
+      $state.go("movies");
+      showMessage(res)
+    });
   }
 
   self.join = function() {
-    User.join(self.user, showMessage);
+    User.join(self.user, function(res){
+      $state.go("movies");
+      showMessage(res)
+    });
   }
 
   self.disappear = function() {
     TokenService.removeToken && TokenService.removeToken();
+    $state.go("homepage");
   }
 
   self.isLoggedIn = function() {

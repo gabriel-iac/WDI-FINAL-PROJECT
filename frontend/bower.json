@@ -1,0 +1,22 @@
+{
+  "name": "wdifinalproject",
+  "version": "0.0.0",
+  "homepage": "https://github.com/gabriel-iac/WDI-FINAL-PROJECT",
+  "authors": [
+    "gabriel-iac <gabriele.iacopetti@gmail.com>"
+  ],
+  "description": "Final project for WDI London.",
+  "main": "app.js",
+  "keywords": [
+    "final",
+    "project"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

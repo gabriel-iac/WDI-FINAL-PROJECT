@@ -1,7 +1,8 @@
-var LocalStrategy = require('passport-local').Strategy;
+var LocalStrategy    = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
-var User          = require("../models/user");
-var jwt           = require('jsonwebtoken');
+var User             = require("../models/user");
+var jwt              = require('jsonwebtoken');
+var secret           = require("./config").secret;
 
 module.exports = function(passport) {
   passport.use('local-signup', new LocalStrategy({
@@ -42,27 +43,26 @@ module.exports = function(passport) {
   passport.use('facebook', new FacebookStrategy({
     clientID        : process.env.FACEBOOK_KEY_API,
     clientSecret    : process.env.FACEBOOK_SECRET_API,
-    callbackURL     : 'http://localhost:8000/api/auth/facebook/callback',
+    callbackURL     : 'http://localhost:3000/api/auth/facebook/callback',
     enableProof     : true,
     profileFields   : ['name', 'emails']
-  }, function(access_token, refresh_token, profile, done) {
-    
-    console.log(profile)
+  }, function(access_token, refresh_token, profile, done) {    
+    // console.log(profile)
+
     process.nextTick(function() {
 
-      User.findOne({ 'fb.id' : profile.id }, function(err, user) {
+      User.findOne({ 'email' : profile.emails[0].value }, function(err, user) {
         if (err) return done(err);
         if (user) {
+          // Update user
           return done(null, user);
         } else {
           
           var newUser = new User();
-          
-          newUser.fb.id           = profile.id;
-          newUser.fb.access_token = access_token;
-          newUser.fb.firstName    = profile.name.givenName;
-          newUser.fb.lastName     = profile.name.familyName;
-          newUser.fb.email        = profile.emails[0].value;
+          newUser.full_name      = profile.name.givenName + " " + profile.name.familyName;
+          newUser.access_token   = access_token;
+          newUser.email          = profile.emails[0].value;
+          newUser.password       = jwt.sign(access_token, secret);
 
           newUser.save(function(err) {
             if (err) throw err;
