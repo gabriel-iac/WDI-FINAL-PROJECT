@@ -1,30 +1,50 @@
-<section class="container" ng-controller="MovieController as films">
+<div class="container" ng-controller="MovieController as films">
 
-  <section ng-show="films.movie">
-    <div class="row col-md-12">
+  <section class="row" ng-show="films.movie">
+    <div class="row col-md-12 movie-show" >
       <div class="card">
-        <img class="card-img-top" ng-src="https://image.tmdb.org/t/p/w300{{films.movie.poster_path}}" alt="Card image cap">
-        <div class="card-block">
+        <img class="card-img-top" ng-src="https://image.tmdb.org/t/p/w780{{films.movie.backdrop_path}}" alt="Card image cap">
+       
           <h5 ng-if="movie.name" class="card-title">{{ films.movie.name}}</h5>
-          <h6 class="card-text"><em>{{ films.movie.media_type}}</em></h6>
-          <p class="card-text overview" >{{ films.movie.overview | limitTo: films.letterLimit}}</p>
+          <p class="card-text " >Summary:{{ films.movie.overview }}</p>
           <p class="card-text">Popularity: {{ films.movie.popularity}}</p>
           <p class="card-text">Rating: {{ films.movie.vote_average}}</p>
           <p class="card-text">Release Date: {{ films.movie.release_date}}</p>
           <a ng-click="films.resetMovie()" class="btn btn-primary">Back</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="row" ng-show="films.movie">
+    <div class="col-md-12 pull-left list-inline" ng-repeat="torrent in films.torrents">
+      <div class="card">
+        <div class="card-block">
+          <h5 class="card-title">{{ torrent.torrent_title }}</h5>
+          <p class="card-text">Hash: {{ torrent.torrent_hash }}</p>
+          <a title="Magnet link" href="{{ torrent.magnet_uri }}" class="btn btn-primary"><i  src="./images/magnet.png" class="fa fa-magnet"></i> Magnet</a>
+         
         </div>
       </div>
     </div>
   </section>
 
-  <section ng-hide="films.movie">
-    <form>
-      <input  ng-change="films.onFilter(search)" type="text" ng-model="search" name="text" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 200, 'blur': 0 } }" />
-    </form>
-    <hr/>
-    <a href="" ng-click="films.predicate=''">unsorted</a>
+  <section class="row" ng-show="!films.movie">
+    <div class="col-lg-12">
+      <div class="input-group">
+        <input class="form-control" ng-change="films.onFilter(search)" type="text" ng-model="search" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 200, 'blur': 0 } }" placeholder="Search for..." />
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" ng-click="films.onFilter(search)">Go!</button>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="row" ng-show="films.allMovies && !films.movie">
     <table class="friend">
       <tr>
+        <th>
+          <a ng-click="films.predicate=''">Clear</a>
+        </th>
         <th>
           <a href="" ng-click="films.order('title')">Title</a>
           <span class="sortorder" ng-show="films.predicate === 'title'" ng-class="{reverse:reverse}"></span>
@@ -43,21 +63,18 @@
         </th>
       </tr>
     </table>
+  </section>
 
-    <div class="row col-md-4  pull-left list-inline" ng-if="movie.poster_path && movie.release_date && movie.overview" ng-repeat="movie in films.allMovies | orderBy:films.predicate:false">
+  <section class="row" ng-show="films.allMovies && !films.movie">
+    <div class="col-md-3 pull-left list-inline" ng-if="movie.poster_path && movie.release_date && movie.overview" ng-repeat="movie in films.allMovies | orderBy:films.predicate:false">
       <div class="card">
-        <img class="card-img-top" ng-src="https://image.tmdb.org/t/p/w300{{movie.poster_path}}" alt="Card image cap">
+        <img class="card-img-top" ng-src="https://image.tmdb.org/t/p/w300{{movie.poster_path}}" alt="Card image">
         <div class="card-block">
-          <a href="" ><h5 ng-click="films.showMovie(movie)" ng-if="movie.title" class="card-title">{{ movie.title}}</h5></a>
-          <h5 ng-if="movie.name" class="card-title">{{ movie.name}}</h5>
-          <h6 class="card-text"><em>{{ movie.media_type}}</em></h6>
-          <p class="card-text overview" >{{ movie.overview | limitTo: films.letterLimit}}</p>
-          <p class="card-text">Popularity: {{ movie.popularity}}</p>
-          <p class="card-text">Rating: {{ movie.vote_average}}</p>
-          <p class="card-text">Release Date: {{ movie.release_date}}</p>
-          <a href="#" class="btn btn-primary">Button</a>
+          <a ng-click="films.showMovie(movie)"><h5 ng-if="movie.title" class="card-title">{{ movie.title}}</h5></a>
+          <h5 ng-if="movie.name" class="card-title" ng-click="films.showMovie(movie)">{{ movie.name}}</h5>
         </div>
       </div>
     </div>
   </section>
-</section>
+
+</div>

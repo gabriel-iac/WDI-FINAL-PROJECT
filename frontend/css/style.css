@@ -1,7 +1,14 @@
-.card{
-  width: 300px;
-
+.card .card-img-top {
+  width: 100%;
+  min-height: 400px;
 }
 .card-block{
-
+  min-height: 125px;
 }
+.movie-show .card{
+  border:none;
+}
+.bg-faded {
+  background-color: #0275d8;
+}
+.fa-magnet
