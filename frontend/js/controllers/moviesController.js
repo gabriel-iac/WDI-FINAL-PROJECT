@@ -14,20 +14,12 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
   var self = this;
   
   self.text = ""
-  // self.movie_id  = [];
-  self.allMovies = [];
-  self.predicate = '-title';
-  self.reverse   = true;
+  self.allMovies   = [];
+  self.predicate   = '-title';
+  self.reverse     = true;
   self.letterLimit = 200;
-  self.myMovie = [];
-  
-
-  // self.limitChar = function(){
-    
-  //   $(".overview").text(function(index, currentText) {
-  //       return currentText.substr(0, 30) + '...';
-  //   });
-  // }
+  self.myMovie     = [];
+  self.movie       = null;
 
   self.order = function(predicate) {
     self.reverse = (self.predicate === predicate) ? !self.reverse : false;
@@ -45,17 +37,14 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
     }  
   }
 
-
-  self.showMovie = function(getMovie){
+  self.showMovie = function(movie){
     if (TokenService.isLoggedIn()) {
-      Movie.get({ query: getMovie }, function(result){
-        self.myMovie = result.id
-      });
-    $state.go('show', { id: getMovie.id });
-    // self.myMovie = getMovie;
-    // console.log(self.myMovie)
+      self.movie = movie;
+    }
   }
-  self.myMovie=[];
+
+  self.resetMovie = function(){
+    self.movie = null;
   }
 
   self.getMovies = function() {
@@ -67,10 +56,4 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
   }
 
   self.getMovies();
-  // self.limitChar();
-  // console.log(result)
-  // for (i=0; i < result.length; i++){
-  //   var test = result[i].genre_id
-  //   console.log(test)
-  // }
 }

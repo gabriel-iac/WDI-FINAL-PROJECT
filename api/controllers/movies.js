@@ -26,7 +26,7 @@ var getMovies = function(req,res){
 }
 
 var showMovie = function(req, res){
-  console.log('hellossss')
+  console.log('hello')
   MovieDB.movieInfo({id: req.id}, function(err, result){
     if (err) {
       res.status(404).send(err);
