@@ -1,8 +1,7 @@
 var mongoose = require('mongoose');
 
-var PhotoSchema = mongoose.Schema({
-  title: String,
-  image: String
+var MovieSchema = mongoose.Schema({
+  
 });
 
-module.exports = mongoose.model('Photo', PhotoSchema);
+module.exports = mongoose.model('Movie', MovieSchema);

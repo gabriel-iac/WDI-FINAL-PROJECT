@@ -7,25 +7,27 @@ angular
   $sceProvider.enabled(false);
 });
 
-MovieController.$inject = ["$resource", '$filter', 'TokenService', 'Movie'];
+MovieController.$inject = ["$resource", '$filter', 'TokenService', 'Movie','$state', '$stateParams'];
 
-function MovieController($resource, $filter, TokenService, Movie){
+function MovieController($resource, $filter, TokenService, Movie, $state, $stateParams){
   var orderBy = $filter('orderBy');
   var self = this;
   
   self.text = ""
-  self.movie_id  = [];
+  // self.movie_id  = [];
   self.allMovies = [];
   self.predicate = '-title';
   self.reverse   = true;
+  self.letterLimit = 200;
+  self.myMovie = [];
+  
 
-  self.limitChar = function(){
+  // self.limitChar = function(){
     
-    $(".overview").text(function(index, currentText) {
-        return currentText.substr(0, 30) + '...';
-    });
-  }
-
+  //   $(".overview").text(function(index, currentText) {
+  //       return currentText.substr(0, 30) + '...';
+  //   });
+  // }
 
   self.order = function(predicate) {
     self.reverse = (self.predicate === predicate) ? !self.reverse : false;
@@ -43,6 +45,19 @@ function MovieController($resource, $filter, TokenService, Movie){
     }  
   }
 
+
+  self.showMovie = function(getMovie){
+    if (TokenService.isLoggedIn()) {
+      Movie.get({ query: getMovie }, function(result){
+        self.myMovie = result.id
+      });
+    $state.go('show', { id: getMovie.id });
+    // self.myMovie = getMovie;
+    // console.log(self.myMovie)
+  }
+  self.myMovie=[];
+  }
+
   self.getMovies = function() {
     if (TokenService.isLoggedIn()) {
       Movie.search({ query: "star wars"}, function(result) {
@@ -52,7 +67,7 @@ function MovieController($resource, $filter, TokenService, Movie){
   }
 
   self.getMovies();
-  self.limitChar();
+  // self.limitChar();
   // console.log(result)
   // for (i=0; i < result.length; i++){
   //   var test = result[i].genre_id

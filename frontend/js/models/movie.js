@@ -13,6 +13,7 @@ function Movie($resource, API) {
       'save':      { method: 'POST' },
       'query':     { method: 'GET', isArray: true},
       'remove':    { method: 'DELETE' },
+       'single': { method: 'GET', url: url + ':id' },
       'delete':    { method: 'DELETE' },
       'search':    {
         method: 'GET',
@@ -20,7 +21,10 @@ function Movie($resource, API) {
           query: '@query'
         },
         isArray: true
-      }
+      },
+     
     }
   );
+
+
 }

@@ -1,7 +1,7 @@
 <section class="container" ng-controller="MovieController as films">
 
   <form >
-    <input  ng-change="films.onFilter(search)" type="text" ng-model="search" name="text" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 300, 'blur': 0 } }" />
+    <input  ng-change="films.onFilter(search)" type="text" ng-model="search" name="text" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 200, 'blur': 0 } }" />
     <!-- <input type="submit" value="submit"> -->
   </form>
   <hr/>
@@ -31,10 +31,10 @@
   <div class="card">
     <img class="card-img-top" ng-src="https://image.tmdb.org/t/p/w300{{movie.poster_path}}" alt="Card image cap">
     <div class="card-block">
-      <h5 ng-if="movie.title" class="card-title">{{ movie.title}}</h5>
+      <a href="" ><h5 ng-click="films.showMovie(movie)" ng-if="movie.title" class="card-title">{{ movie.title}}</h5></a>
       <h5 ng-if="movie.name" class="card-title">{{ movie.name}}</h5>
       <h6 class="card-text"><em>{{ movie.media_type}}</em></h6>
-      <p class="card-text overview" >{{ movie.overview | limitTo: 300}}</p>
+      <p class="card-text overview" >{{ movie.overview | limitTo: films.letterLimit}}</p>
       <p class="card-text">Popularity: {{ movie.popularity}}</p>
       <p class="card-text">Rating: {{ movie.vote_average}}</p>
       <p class="card-text">Release Date: {{ movie.release_date}}</p>

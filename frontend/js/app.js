@@ -25,5 +25,9 @@ angular
         templateUrl: "js/templates/movies.html",
         url: "/movies"
       })
+      .state('show', {
+        templateUrl: "js/templates/show.html",
+        url: "/movies/:id"
+      })
       $urlRouterProvider.otherwise('/');    
     }

@@ -15,6 +15,10 @@ router = express.Router(),
     //GET all movies
   router.route('/movies')
     .get(MoviesController.getMovies)
+    
+    //Get Movie
+    router.route('/movies/:id')
+      .get(MoviesController.showMovie)
   //GET all users
   router.route('/users')
   .get(UsersController.getUsers)
