@@ -86,15 +86,24 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
     }
   }
 
+  function fadeIn(el) {
+    el.style.opacity = 0;
+    var tick = function() {
+      el.style.opacity = +el.style.opacity + 0.01;
+      if (+el.style.opacity < 1) {
+        (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16)
+      }
+    };
+    tick();
+  }
 
-
-  //  setTimeout(function(){
-
-  //    $('.card-wrap').addClass("animated zoomIn");
-  //    // $( ".card-wrap" ).slideUp( "slow", function() {
-  //    //   console.log('.card-wrap')
-  //      // Animation complete
-  //    }, 400);
-  // $('.card-wrap').removeClass("animated zoomIn");
+self.test = function(){
+  $('.card-wrap').each(function(index, card){
+    card.style.opacity = 0;
+    setTimeout(function(card){
+      fadeIn(card)
+    }, 100*index+1, card)
+  });
+}
 
 }

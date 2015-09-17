@@ -92,7 +92,7 @@
   </section>
 
   <section class="row" ng-show="films.allMovies && !films.movie">
-    <div class="col-md-3 pull-left list-inline card-wrap" ng-if="movie.poster_path && movie.release_date && movie.overview" ng-repeat="movie in films.allMovies | orderBy:films.predicate:false" >
+    <div class="col-md-3 pull-left list-inline card-wrap " ng-if="movie.poster_path && movie.release_date && movie.overview" ng-repeat="movie in films.allMovies | orderBy:films.predicate:false" >
       <div class="card" >
         <a href="#" ng-click="films.showMovie(movie)"><img class="card-img-top" ng-src="https://image.tmdb.org/t/p/w300{{movie.poster_path}}" alt="Card image"></a>
         <div class="card-block">

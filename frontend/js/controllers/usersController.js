@@ -51,5 +51,14 @@ function UserController(User, TokenService, $state) {
   //   self.agent = TokenService.parseJwt();
   // }
 
+  self.beard = function(){
+    $(document).ready(function(){
+      $('#title-curved ').arctext({radius: 200, dir: -1})
+     
+    })
+  }
+ 
   return self;
+
+  
 }
