@@ -52,8 +52,10 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
       }else{
         var str = movie.title;
       }
+      //keep this bit for future
+      //+ "&category=Movies"
 
-      $http.get("https://getstrike.net/api/v2/torrents/search/?phrase=" + str + "&category=Movies")
+      $http.get("https://getstrike.net/api/v2/torrents/search/?phrase=" + str )
       .success(function(response) {
         console.log(response)
         if (response.torrents.length > 10){
@@ -61,6 +63,7 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
           console.log(response.torrents)
         }else{
           self.torrents = response.torrents
+          
         }
 
       })

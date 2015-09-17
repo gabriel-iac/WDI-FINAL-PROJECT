@@ -1,36 +1,64 @@
 <div class="container" ng-controller="MovieController as films">
-
   <section class="row" ng-show="films.movie">
-    <div class="row col-md-12 movie-show" >
+    <div class="col-md-12 movie-show">
       <div class="card">
-        <img class="card-img-top" ng-src="https://image.tmdb.org/t/p/w780{{films.movie.backdrop_path}}" alt="Card image cap">
-       
-          <h5 ng-if="movie.name" class="card-title">{{ films.movie.name}}</h5>
-          <p class="card-text " >Summary:{{ films.movie.overview }}</p>
-          <p class="card-text">Popularity: {{ films.movie.popularity}}</p>
-          <p class="card-text">Rating: {{ films.movie.vote_average}}</p>
-          <p class="card-text">Release Date: {{ films.movie.release_date}}</p>
-          <a ng-click="films.resetMovie()" class="btn btn-primary">Back</a>
+        <img class="card-img-top film-img" ng-src="https://image.tmdb.org/t/p/w780{{films.movie.backdrop_path}}" alt="Card image cap">
+        <div class="col-lg-12 clearfix film-info" id="details">
+          <div class="col-md-8">
+            <h3><a ng-if="films.movie.title" href="#">{{ films.movie.title}}</a></h3>
+            <h3><a ng-if="films.movie.name" href="#">{{ films.movie.name}}</a></h3>
+            <p class="card-text "><h3>Summary:</h3>{{ films.movie.overview }}</p>
+            <a ng-click="films.resetMovie()" class="btn btn-primary">Back</a>
+          </div>
+          <div class="col-md-4" id="sub-details">
+            <strong>Release Date: </strong><span>{{ films.movie.release_date}}</span>
+            <br>
+            <ul class="list-unstyled">
+              <li><strong>Media Type: </strong><span>{{ films.movie.media_type}}</span></li>
+              <li><strong>Popularity: </strong><span>{{ films.movie.popularity}}</span></li>
+              <li><strong>Rating: </strong><span>{{ films.movie.vote_average}}</span></li>
+              <li><strong>Language: </strong><span>{{ films.movie.original_language}}</span></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="row" ng-show="films.movie">
-    <div class="col-md-12 pull-left list-inline" ng-repeat="torrent in films.torrents">
+    <div class="col-md-12 container pull-left list-inline" ng-repeat="torrent in films.torrents">
       <div class="card">
         <div class="card-block">
           <h5 class="card-title">{{ torrent.torrent_title }}</h5>
-          <p class="card-text">Hash: {{ torrent.torrent_hash }}</p>
-          <a title="Magnet link" href="{{ torrent.magnet_uri }}" class="btn btn-primary"><i  src="./images/magnet.png" class="fa fa-magnet"></i> Magnet</a>
+          <!-- <p class="card-text">Hash: {{ torrent.torrent_hash }}</p> -->
          
+
+          <div class="row">
+            <div class="col-sm-6">
+              <ul>
+             <li> <a title="Magnet link" href="{{ torrent.magnet_uri }}" class="btn btn-primary"><i  src="./images/magnet.png" class="fa fa-magnet"></i> Magnet</a>
+              <span class="seeders"><i class="fa fa-arrow-up"></i>Leechers: {{ torrent.leeches }}</span><span class="leechers"><i class="fa fa-arrow-down"></i>Seedeers: {{ torrent.seeds }}</span></li>
+                <li><span class="advanced-info-title">Torrent upload date:</span> {{ torrent.upload_date }}</li>
+                <li><span class="advanced-info-title">Torrent category:</span> {{ torrent.torrent_category }}</li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <ul>
+                <li><span class="advanced-info-title">Download Count:</span> {{ torrent.download_count }}</li>
+                <li><span class="advanced-info-title">Torrent size:</span> {{ torrent.size }}</li>
+                <li><span class="advanced-info-title">Torrent file count:</span> {{ torrent.file_count }}</li>
+              </ul>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
   </section>
 
   <section class="row" ng-show="!films.movie">
-    <div class="col-lg-12">
-      <div class="input-group">
+    <div class="col-lg-12 row">
+      <div class="input-group search-input">
         <input class="form-control" ng-change="films.onFilter(search)" type="text" ng-model="search" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 200, 'blur': 0 } }" placeholder="Search for..." />
         <span class="input-group-btn">
           <button class="btn btn-default" type="button" ng-click="films.onFilter(search)">Go!</button>
@@ -76,5 +104,4 @@
       </div>
     </div>
   </section>
-
 </div>
