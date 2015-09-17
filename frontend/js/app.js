@@ -1,5 +1,5 @@
 angular
-  .module('final-project', ['angular-jwt', 'ngResource', 'ui.router'])
+  .module('final-project', ['angular-jwt', 'ngResource', 'ui.router', 'ngAnimate'])
   .constant('API', 'http://localhost:3000/api')
   .config(function($httpProvider, $sceProvider) {
     $httpProvider.interceptors.push('authInterceptor');

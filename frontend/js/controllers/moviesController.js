@@ -11,9 +11,9 @@ angular
           $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|file|blob|ftp|mailto|c‌​hrome-extension|magnet):/);
     }]);
 
-MovieController.$inject = ["$resource", '$filter', 'TokenService', 'Movie','$state', '$stateParams', '$http'];
+MovieController.$inject = ["$resource", '$filter', 'TokenService', 'Movie','$state', '$stateParams', '$http','$animate'];
 
-function MovieController($resource, $filter, TokenService, Movie, $state, $stateParams, $http){
+function MovieController($resource, $filter, TokenService, Movie, $state, $stateParams, $http, $animate){
   var orderBy = $filter('orderBy');
   var self = this;
   
@@ -86,4 +86,16 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
     }
   }
   self.getMovies();
+
+
+  
+    self.test = function(){ 
+    
+      $(".card-wrap").show("slide", { direction: "left" }, 1000);
+     
+    }
+
+     
+
+
 }
