@@ -20,6 +20,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular-animate": "~1.4.5"
+    "angular-animate": "~1.4.5",
+    "animate.css": "~3.4.0"
   }
 }

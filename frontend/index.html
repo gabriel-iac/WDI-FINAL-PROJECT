@@ -4,12 +4,13 @@
   <meta charset="UTF-8">
   <title>Movie something</title>
   <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./bower_components/animate.css/animate.min.css">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/font-Awesome.min.css">
 </head>
 <body ng-controller="usersController as users">
   <div ng-include="'./js/templates/partials/header.html'"></div>
-  <main class="container" ui-view></main>
+  <main  ui-view></main>
   <div ng-include="'./js/templates/partials/footer.html'"></div>
 
   <!-- External JS Resources --> 
@@ -23,7 +24,6 @@
 
   <!-- Internal JS Resources --> 
   <script src="js/app.js"></script>
-  <script src="js/effects.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.2/angular-animate.js"></script>
   <script type="text/javascript" src="./js/services/authInterceptor.js"></script>
   <script type="text/javascript" src="./js/services/tokenService.js"></script>

@@ -7,9 +7,9 @@ angular
   $sceProvider.enabled(false);
 })
 .config(['$compileProvider' , function ($compileProvider)
-    {
-          $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|file|blob|ftp|mailto|c‌​hrome-extension|magnet):/);
-    }]);
+{
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|file|blob|ftp|mailto|c‌​hrome-extension|magnet):/);
+}]);
 
 MovieController.$inject = ["$resource", '$filter', 'TokenService', 'Movie','$state', '$stateParams', '$http','$animate'];
 
@@ -85,17 +85,16 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
       });
     }
   }
-  self.getMovies();
 
 
-  
-    self.test = function(){ 
-    
-      $(".card-wrap").show("slide", { direction: "left" }, 1000);
-     
-    }
 
-     
+  //  setTimeout(function(){
 
+  //    $('.card-wrap').addClass("animated zoomIn");
+  //    // $( ".card-wrap" ).slideUp( "slow", function() {
+  //    //   console.log('.card-wrap')
+  //      // Animation complete
+  //    }, 400);
+  // $('.card-wrap').removeClass("animated zoomIn");
 
 }

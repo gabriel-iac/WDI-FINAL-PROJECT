@@ -2,9 +2,28 @@
 body{
   background-color: #F2F2F3;
   font-family: Ubuntu,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  color: #666666;
+}
+a{
+  color: #fff;
+}
+.card-block h6 {
+  color: #666666;
+}
+
+
+a:hover{
+  text-decoration: none;
+}
+h1, h2,h5 {
+    margin: 0 0 30px;
+    text-transform: uppercase;
+    font-family: Ubuntu,sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 header{
-  margin-bottom: 70px;
+  margin-bottom: 60px;
 }
 ul{
   list-style: none !important;
@@ -96,9 +115,21 @@ ul{
     box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
     -webkit-overflow-scrolling: touch;
 }*/
+.btn-primary{
+  color: #fff;
+  background-color: #666666;
+  border-color: #666666;
+}
+.btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open>.btn-primary.dropdown-toggle {
+    color: #666666;
+    background-color: #fff;
+    border-color: #fff;
+}
 #intro {
-    background-image: url(../img/img-bg.jpg);
+    background: url(../images/img-bg.jpg) no-repeat center top;
     background-size: cover;
+    color: #fff;
+    height: 100vh;
 }
 .home-section {
     padding-top: 110px;
@@ -110,8 +141,14 @@ ul{
 .intro .slogan {
     padding: 250px 0 60px;
     text-align: center;
-}
 
+}
+.section-heading h2 {
+    font-size: 40px;
+}
+.marginbot-50 {
+    margin-bottom: 50px!important;
+}
 
 .animate-repeat.ng-enter, 
 .animate-repeat.ng-leave
@@ -141,4 +178,16 @@ ul{
 .animated-repeat.ng-enter-stagger {
   transition-delay: 0.5s;
   animation-delay: 0.5s;
+}
+
+/*.card-wrap {
+  -webkit-animation-duration: 3s;
+  -webkit-animation-delay: 2s;
+ 
+}*/
+.movie-show h3 a{
+  color: #666666;
+}
+.col-md-3 {
+    width: 24.8%;
 }
