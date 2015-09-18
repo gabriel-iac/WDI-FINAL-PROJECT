@@ -129,13 +129,14 @@ ul{
  /*   background: url(../images/img-bg.png) no-repeat center top;
     background-size: cover;*/
     color: #000;
-    height: 100%;
+    height: 100vh;
     background-color: #F2F2F3;
 }
 .home-section {
     padding-top: 110px;
     padding-bottom: 110px;
     display: block;
+    height: 100vh;
     position: relative;
     z-index: 120;
     background-color: #fff;

@@ -72,7 +72,7 @@
           <a class="btn btn-primary" href="#" ng-click="films.predicate=''">Clear</a>
         </th>
         <th>
-          <a class="btn btn-primary" href="" ng-click="films.order('title'); films.test();">Title</a>
+          <a class="btn btn-primary" href="" ng-click="films.order('title'); ">Title</a>
           <span class="sortorder" ng-show="films.predicate === 'title'" ng-class="{reverse:reverse}"></span>
         </th>
         <th>
@@ -80,11 +80,11 @@
           <span class="sortorder" ng-show="films.predicate === '-popularity'" ng-class="{reverse:reverse}"></span>
         </th>
         <th>
-          <a class="btn btn-primary" href="" ng-click="films.order('-vote_average'); films.test();">Ratings</a>
+          <a class="btn btn-primary" href="" ng-click="films.order('-vote_average'); ">Ratings</a>
           <span class="sortorder" ng-show="films.predicate === '-vote_average'" ng-class="{reverse:reverse}"></span>
         </th>
         <th>
-          <a class="btn btn-primary" href="" ng-click="films.order('-release_date'); films.test();">Release date</a>
+          <a class="btn btn-primary" href="" ng-click="films.order('-release_date'); ">Release date</a>
           <span class="sortorder" ng-show="films.predicate === '-release_date'" ng-class="{reverse:reverse}"></span>
         </th>
       </tr>
