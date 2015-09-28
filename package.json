@@ -2,7 +2,8 @@
   "name": "Wdi-final-project-api",
   "version": "0.0.0",
   "scripts": {
-    "start": "node config/seeds.js | nodemon app.js"
+    "start": "node config/seeds.js | nodemon app.js",
+    "postinstall": "./node_modules/bower/bin/bower install"
   },
   "dependencies": {
     "body-parser": "^1.13.2",
