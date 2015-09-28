@@ -4,7 +4,7 @@ angular
 
 Movie.$inject = ['$resource', 'API'];
 function Movie($resource, API) {
-  var url = '/api'
+  var url = 'https://blackbeard-mdb.herokuapp.com/api'
 
   return $resource(
     url+'/movies/:id',
