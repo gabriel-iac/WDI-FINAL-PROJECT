@@ -4,7 +4,7 @@ angular
 
 User.$inject = ['$resource', 'API'];
 function User($resource, API) {
-  var url = 'http://localhost:3000/api' || 'https://blackbeard-mdb.herokuapp.com/api'
+  var url = 'https://blackbeard-mdb.herokuapp.com/api'
 
   return $resource(
     url+'/users/:id',
