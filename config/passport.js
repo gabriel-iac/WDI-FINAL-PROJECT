@@ -40,36 +40,36 @@ module.exports = function(passport) {
     });
   });
 
-  passport.use('facebook', new FacebookStrategy({
-    clientID        : process.env.FACEBOOK_KEY_API,
-    clientSecret    : process.env.FACEBOOK_SECRET_API,
-    callbackURL     : 'http://localhost:3000/api/auth/facebook/callback',
-    enableProof     : true,
-    profileFields   : ['name', 'emails']
-  }, function(access_token, refresh_token, profile, done) {    
-    // console.log(profile)
+  // passport.use('facebook', new FacebookStrategy({
+  //   clientID        : process.env.FACEBOOK_KEY_API,
+  //   clientSecret    : process.env.FACEBOOK_SECRET_API,
+  //   callbackURL     : 'http://localhost:3000/api/auth/facebook/callback',
+  //   enableProof     : true,
+  //   profileFields   : ['name', 'emails']
+  // }, function(access_token, refresh_token, profile, done) {    
+  //   // console.log(profile)
 
-    process.nextTick(function() {
+  //   process.nextTick(function() {
 
-      User.findOne({ 'email' : profile.emails[0].value }, function(err, user) {
-        if (err) return done(err);
-        if (user) {
-          // Update user
-          return done(null, user);
-        } else {
+  //     User.findOne({ 'email' : profile.emails[0].value }, function(err, user) {
+  //       if (err) return done(err);
+  //       if (user) {
+  //         // Update user
+  //         return done(null, user);
+  //       } else {
           
-          var newUser = new User();
-          newUser.full_name      = profile.name.givenName + " " + profile.name.familyName;
-          newUser.access_token   = access_token;
-          newUser.email          = profile.emails[0].value;
-          newUser.password       = jwt.sign(access_token, secret);
+  //         var newUser = new User();
+  //         newUser.full_name      = profile.name.givenName + " " + profile.name.familyName;
+  //         newUser.access_token   = access_token;
+  //         newUser.email          = profile.emails[0].value;
+  //         newUser.password       = jwt.sign(access_token, secret);
 
-          newUser.save(function(err) {
-            if (err) throw err;
-            return done(null, newUser);
-          });
-        };
-      });
-    });
-  }));
+  //         newUser.save(function(err) {
+  //           if (err) throw err;
+  //           return done(null, newUser);
+  //         });
+  //       };
+  //     });
+  //   });
+  // }));
 }
