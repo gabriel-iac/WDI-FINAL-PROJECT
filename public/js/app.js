@@ -1,6 +1,6 @@
 angular
   .module('final-project', ['angular-jwt', 'ngResource', 'ui.router', 'ngAnimate'])
-  .constant('API', 'http://localhost:3000/api')
+  .constant('API', 'https://blackbeard-mdb.herokuapp.com/api')
   .config(function($httpProvider, $sceProvider) {
     $httpProvider.interceptors.push('authInterceptor');
 
