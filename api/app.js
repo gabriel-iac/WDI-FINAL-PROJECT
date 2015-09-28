@@ -20,7 +20,7 @@ app.set("views", "./public");
 app.use(express.static(__dirname + '/public'));
 
 // Serving bower_components from root. Might change to public later
-app.use('/bower_components', express.static(__dirname + '/bower_components'));
+app.use('/bower_components', express.static(__dirname + 'public/bower_components'));
 // Secret JWT phrase, should move to process.env
 var secret     = config.secret;
 

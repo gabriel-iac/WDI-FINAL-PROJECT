@@ -85,7 +85,8 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
       });
     }
   }
-
+  
+  //keep this bits for future
   // function fadeIn(el) {
   //   el.style.opacity = 0;
   //   var tick = function() {
