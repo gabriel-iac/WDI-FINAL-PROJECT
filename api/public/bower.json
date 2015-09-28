@@ -21,7 +21,16 @@
   ],
   "dependencies": {
     "Arctext.js": "arctext-js#*",
+    "angular": "~1.4.6",
     "angular-animate": "~1.4.5",
-    "animate.css": "~3.4.0"
+    "angular-jwt": "~0.0.9",
+    "angular-resource": "~1.4.6",
+    "angular-ui-router": "~0.2.15",
+    "animate.css": "~3.4.0",
+    "bootstrap": "v4.0.0-alpha",
+    "jquery": "~2.1.4"
+  },
+  "resolutions": {
+    "angular": "~1.4.6"
   }
 }
