@@ -9,8 +9,9 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var config     = require('./config/config');
 var app        = express();
 var mongoose   = require('mongoose');
+var databaseURL = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/final-project'
+mongoose.connect(databaseURL);
 
-mongoose.connect(config.database);
 
 // Setting view folder for single index.html file
 app.set("views", "./public");
@@ -40,7 +41,7 @@ app.use(passport.initialize());
 app.get('/api/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
 
 app.get('/api/auth/facebook/callback', passport.authenticate('facebook',{
-  successRedirect: 'http://localhost:3000/',
+  successRedirect: 'http://localhost:3000/ ',
   failureRedirect: 'http://localhost:3000/login'
   })
 )
