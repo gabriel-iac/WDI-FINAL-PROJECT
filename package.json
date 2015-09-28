@@ -20,7 +20,8 @@
     "passport": "^0.3.0",
     "passport-local": "^1.0.0",
     "jsonwebtoken": "^5.0.4",
-    "moviedb": "^0.2.0"
+    "moviedb": "^0.2.0",
+    "bower": "latest"
   },
   "license": "ISC"
 }
