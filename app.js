@@ -27,7 +27,7 @@ var secret     = config.secret;
 // Authorize the routes after the facebook URLS
 app
 .use('/api', expressJWT({secret: config.secret})
-  .unless({path: ['https://blackbeard-mdb.herokuapp.com/api/authorize', 'https://blackbeard-mdb.herokuapp.com/api/join', '/api/auth/facebook', '/api/auth/facebook/callback']}));
+  .unless({path: ['/api/authorize', '/api/join', '/api/auth/facebook', '/api/auth/facebook/callback']}));
 
 require("./config/passport")(passport, FacebookStrategy)
 
@@ -41,7 +41,7 @@ app.use(passport.initialize());
 app.get('/api/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
 
 app.get('/api/auth/facebook/callback', passport.authenticate('facebook',{
-  successRedirect: 'https://blackbeard-mdb.herokuapp.com/' ,
+  successRedirect:  'https://blackbeard-mdb.herokuapp.com' ,
   failureRedirect: 'https://blackbeard-mdb.herokuapp.com/login'
   })
 )
