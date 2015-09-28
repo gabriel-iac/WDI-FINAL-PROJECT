@@ -12,6 +12,14 @@ var mongoose   = require('mongoose');
 
 mongoose.connect(config.database);
 
+// Setting view folder for single index.html file
+app.set("views", "./public");
+
+// Serve all js, css, html from the public folder
+app.use(express.static(__dirname + '/public'));
+
+// Serving bower_components from root. Might change to public later
+app.use('/bower_components', express.static(__dirname + '/bower_components'));
 // Secret JWT phrase, should move to process.env
 var secret     = config.secret;
 
@@ -32,8 +40,8 @@ app.use(passport.initialize());
 app.get('/api/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
 
 app.get('/api/auth/facebook/callback', passport.authenticate('facebook',{
-  successRedirect: 'http://localhost:8000/',
-  failureRedirect: 'http://localhost:8000/login'
+  successRedirect: 'http://localhost:3000/',
+  failureRedirect: 'http://localhost:3000/login'
   })
 )
 
