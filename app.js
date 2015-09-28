@@ -27,7 +27,7 @@ var secret     = config.secret;
 // Authorize the routes after the facebook URLS
 app
 .use('/api', expressJWT({secret: config.secret})
-  .unless({path: ['/api/authorize', '/api/join', '/api/auth/facebook', '/api/auth/facebook/callback']}));
+  .unless({path: ['https://blackbeard-mdb.herokuapp.com/api/authorize', 'https://blackbeard-mdb.herokuapp.com/api/join', '/api/auth/facebook', '/api/auth/facebook/callback']}));
 
 require("./config/passport")(passport, FacebookStrategy)
 
