@@ -41,8 +41,8 @@ app.use(passport.initialize());
 app.get('/api/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
 
 app.get('/api/auth/facebook/callback', passport.authenticate('facebook',{
-  successRedirect: './',
-  failureRedirect: './login'  
+  successRedirect: '/',
+  failureRedirect: '/login'  
   })
 )
 

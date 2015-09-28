@@ -4,7 +4,7 @@ angular
 
 User.$inject = ['$resource', 'API'];
 function User($resource, API) {
-  var url = 'http://localhost:3000/api'
+  var url = '/api'
 
   return $resource(
     url+'/users/:id',
