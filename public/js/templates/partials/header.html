@@ -8,11 +8,11 @@
             <li class="nav-item" ng-show="users.isLoggedIn()">
               <a class="nav-link" href="/#/movies">MOVIES</a>
             </li>
-            <li class="nav-item pull-right" ng-hide="users.isLoggedIn()">
-              <a class="nav-link" href="/#/login">LOGIN</a>
+            <li class="nav-item pull-right" ng-hide="users.isLoggedIn()" >
+              <a class="nav-link" href="/#/" data-toggle="modal" data-target="#login_modal">LOGIN</a>
             </li>
             <li class="nav-item pull-right" ng-hide="users.isLoggedIn()">
-              <a class="nav-link" href="/#/signup">SIGNUP</a>
+              <a class="nav-link" href="/#/" data-toggle="modal" data-target="#signup_modal">SIGNUP</a>
             </li>
             <!-- <li class="nav-item pull-right" ng-hide="users.isLoggedIn()">
               <a class="nav-link" href="http://localhost:3000/api/auth/facebook">Login with Facebook</a>
@@ -25,4 +25,70 @@
       </div>
     </div>
   </nav>
+
+
+   <section class="container" ng-hide="users.isLoggedIn()">
+
+   
+    <div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title" id="editModalLabel">Login</h4>
+          </div>
+          <div class="modal-body">
+           <form id="authorize" ng-hide="users.isLoggedIn()" ng-submit="users.authorize()">
+             <fieldset class="form-group">
+               <label for="email">Email address</label>
+               <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="users.user.email">
+               <small class="text-muted">We'll never share your email with anyone else.</small>
+             </fieldset>
+             <fieldset class="form-group">
+               <label for="password">Password</label>
+               <input type="password" class="form-control" id="password" placeholder="Password" ng-model="users.user.password">
+             </fieldset>
+             <button type="submit" class="btn btn-primary">Submit</button>
+           </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container" ng-hide="users.isLoggedIn()">
+    
+
+    <div class="modal fade" id="signup_modal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title" id="editModalLabel">Sign Up</h4>
+          </div>
+          <div class="modal-body">
+           <form id="authorize" ng-hide="users.isLoggedIn()" ng-submit="users.join()">
+                 <fieldset class="form-group">
+                   <label for="full_name">Full</label>
+                   <input type="text" class="form-control" id="full_name" placeholder="Full name" ng-model="users.user.full_name">
+                 </fieldset>
+                 <fieldset class="form-group">
+                   <label for="email">Email address</label>
+                   <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="users.user.email">
+                   <small class="text-muted">We'll never share your email with anyone else.</small>
+                 </fieldset>
+                 <fieldset class="form-group">
+                   <label for="password">Password</label>
+                   <input type="password" class="form-control" id="password" placeholder="Password" ng-model="users.user.password">
+                 </fieldset>
+                 <button type="submit" class="btn btn-primary">Submit</button>
+               </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
 </header>
