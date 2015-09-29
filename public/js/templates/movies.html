@@ -5,8 +5,8 @@
         <img class="card-img-top film-img" ng-src="https://image.tmdb.org/t/p/w780{{films.movie.backdrop_path}}" alt="Card image cap">
         <div class="col-lg-12 clearfix film-info" id="details">
           <div class="col-md-8">
-            <h3><a ng-if="films.omdbmovie.Title" href="#">{{ films.omdb.Title}}</a></h3>
-            <h3><a ng-if="films.omdbmovie.name" href="#">{{ films.omdb.name}}</a></h3>
+            <h3><a ng-if="films.omdbmovie.Title" href="#">{{ films.omdbmovie.Title}}</a></h3>
+            <h3><a ng-if="films.omdbmovie.name" href="#">{{ films.omdbmovie.name}}</a></h3>
             <p class="card-text "><h3>Summary:</h3>{{ films.omdbmovie.Plot }}</p>
             <a ng-click="films.resetMovie()" class="btn btn-primary">Back</a>
           </div>
@@ -92,7 +92,7 @@
   </section>
 
   <section class="row" ng-show="films.allMovies && !films.movie">
-    <div class="col-md-3 pull-left list-inline card-wrap" ng-if="movie.poster_path && movie.release_date && movie.overview" ng-repeat="movie in films.allMovies | orderBy:films.predicate:false" >
+    <div class="col-md-3 pull-left list-inline card-wrap" ng-if="movie.poster_path && movie.release_date" ng-repeat="movie in films.allMovies | orderBy:films.predicate:false" >
       <div class="card " >
         <a href="#" ng-click="films.showMovie(movie)"><img class="card-img-top" ng-src="https://image.tmdb.org/t/p/w300{{movie.poster_path}}" alt="Card image"></a>
         <div class="card-block">
