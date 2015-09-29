@@ -38,7 +38,7 @@ function UserController(User, TokenService, $state) {
   }
 
   self.isLoggedIn = function() {
-    return TokenService.isLoggedIn ? TokenService.isLoggedIn() : false;
+  return TokenService.isLoggedIn ? TokenService.isLoggedIn() : false;
   }
 
 
@@ -49,7 +49,13 @@ function UserController(User, TokenService, $state) {
      
     })
   }
- 
+self.modal = function(){
+  if (self.isLoggedIn) {
+    $('.modal-backdrop').css("display", "none");
+  };
+  
+}
+
   return self;
 
   
