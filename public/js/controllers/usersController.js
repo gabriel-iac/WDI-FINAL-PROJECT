@@ -49,12 +49,13 @@ function UserController(User, TokenService, $state) {
      
     })
   }
-self.modal = function(){
-  if (self.isLoggedIn) {
-    $('.modal-backdrop').css("display", "none");
-  };
+//not working right now, have to change something
+// self.modal = function(){
+//   if (self.isLoggedIn) {
+//     $('.modal-backdrop').css("display", "none");
+//   };
   
-}
+// }
 
   return self;
 
