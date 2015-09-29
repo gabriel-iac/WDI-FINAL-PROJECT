@@ -19,7 +19,7 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
   
   self.text = ""
   self.allMovies   = null;
-  self.predicate   = '';
+  self.predicate   = '-title';
   self.reverse     = true;
   self.letterLimit = 200;
   self.movie       = null;
@@ -47,7 +47,7 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
 
       var str = movie.title;
 
-      $http.get("http://www.omdbapi.com/?t=" + str +"&y=&plot=full&r=json")
+      $http.get("https://www.omdbapi.com/?t=" + str +"&y=&plot=full&r=json")
       .success(function(res) {
         self.omdbmovie = res;
         console.log(self.omdbmovie)
