@@ -19,7 +19,7 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
   
   self.text = ""
   self.allMovies   = null;
-  self.predicate   = '-title';
+  self.predicate   = '';
   self.reverse     = true;
   self.letterLimit = 200;
   self.movie       = null;

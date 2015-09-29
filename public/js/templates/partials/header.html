@@ -17,7 +17,8 @@
             <!-- <li class="nav-item pull-right" ng-hide="users.isLoggedIn()">
               <a class="nav-link" href="/api/auth/facebook">Login with Facebook</a>
             </li> -->
-            <li class="nav-item pull-right" ng-show="users.isLoggedIn()">
+            <li class="nav-item pull-right" ng-show="users.isLoggedIn()" ng-repeat="user in users">
+            <p ng-if="users.isLoggedIn()">{{users.user.full_name}}</p>
               <a class="nav-link" href="/#" ng-click="users.disappear()" >LOG OUT</a>
             </li>
           </ul>
@@ -25,39 +26,39 @@
       </div>
     </div>
   </nav>
- 
-    <div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content" >
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-            </button>
-            <h4 class="modal-title" id="editModalLabel">Login</h4>
-          </div>
-          <div class="modal-body">
-           <form id="authorize" ng-hide="users.isLoggedIn()" ng-submit="users.authorize()">
-             <fieldset class="form-group">
-               <label for="email">Email address</label>
-               <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="users.user.email">
-               <small class="text-muted">We'll never share your email with anyone else.</small>
-             </fieldset>
-             <fieldset class="form-group">
-               <label for="password">Password</label>
-               <input type="password" class="form-control" id="password" placeholder="Password" ng-model="users.user.password">
-             </fieldset>
-             <input id="form_submit" type="submit" class="btn btn-primary" value="Submit">
-           </form>
-         </div>
-         <div id="form_footer" class="modal-footer text-center" ng-show="users.isLoggedIn()">
-                <h5 id="form_welcome" class="modal-title">Welcome Home.</h5>
-                <button id="form_submit" type="button" class="btn btn-primary" data-dismiss="modal">Explore</button>
-              </div>
+
+  <div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" >
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+          </button>
+          <h4 class="modal-title" id="editModalLabel">Login</h4>
+        </div>
+        <div class="modal-body">
+         <form id="authorize" ng-hide="users.isLoggedIn()" ng-submit="users.authorize()">
+           <fieldset class="form-group">
+             <label for="email">Email address</label>
+             <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="users.user.email">
+             <small class="text-muted">We'll never share your email with anyone else.</small>
+           </fieldset>
+           <fieldset class="form-group">
+             <label for="password">Password</label>
+             <input type="password" class="form-control" id="password" placeholder="Password" ng-model="users.user.password">
+           </fieldset>
+           <input id="form_submit" type="submit" class="btn btn-primary" value="Submit">
+         </form>
        </div>
-     </div>
-   </div>
+       <div id="form_footer" class="modal-footer text-center" ng-show="users.isLoggedIn()">
+       <h5 id="form_welcome" class="modal-title">Begin the Search</h5>
+        <button id="form_submit" type="button" class="btn btn-primary" data-dismiss="modal">Explore</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
- <section class="container" ng-hide="users.isLoggedIn()">
+<section class="container" ng-hide="users.isLoggedIn()">
   <div class="modal fade" ng-hide="users.isLoggedIn()"id="signup_modal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content" ng-hide="users.isLoggedIn()">
@@ -85,12 +86,12 @@
          </form>
        </div>
        <div id="form_footer" class="modal-footer text-center" ng-show="users.isLoggedIn()">
-              <h5 id="form_welcome" class="modal-title">Welcome Home.</h5>
-              <button id="form_submit" type="button" class="btn btn-primary" data-dismiss="modal">Explore</button>
-            </div>
-       
-     </div>
-   </div>
- </div>
+        <h5 id="form_welcome" class="modal-title">Begin the Search</h5>
+        <button id="form_submit" type="button" class="btn btn-primary" data-dismiss="modal">Explore</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 </section>
 </header>
