@@ -33,7 +33,6 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
     if(input){
       Movie.search({ query: input }, function(result){
         self.allMovies = result;
-
       });
     } else {
       self.allMovies = null;
@@ -45,10 +44,19 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
     if (TokenService.isLoggedIn()) {
       self.movie = movie;
       console.log(movie)
+
       var str = movie.title;
+
+      $http.get("http://www.omdbapi.com/?t=" + str +"&y=&plot=full&r=json")
+      .success(function(res) {
+        self.omdbmovie = res;
+        console.log(self.omdbmovie)
+      })
+      .error(function(res) {
+        self.omdbmovie = null;
+      })
       if (str.length > 15) {
         var str = str.split(/\s+/).slice(0,4).join(" ");
-
       }else{
         var str = movie.title;
       }
@@ -57,19 +65,20 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
 
       $http.get("https://getstrike.net/api/v2/torrents/search/?phrase=" + str )
       .success(function(response) {
-        console.log(response)
+     
         if (response.torrents.length > 10){
           self.torrents = response.torrents.slice(0, 10);
           console.log(response.torrents)
         }else{
           self.torrents = response.torrents
-          
         }
-
       })
       .error(function(response) {
         self.torrents = null;
       })
+
+
+
     }
   }
 

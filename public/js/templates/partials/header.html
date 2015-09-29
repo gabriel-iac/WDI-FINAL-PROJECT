@@ -17,8 +17,8 @@
             <!-- <li class="nav-item pull-right" ng-hide="users.isLoggedIn()">
               <a class="nav-link" href="/api/auth/facebook">Login with Facebook</a>
             </li> -->
-            <li class="nav-item pull-right" ng-show="users.isLoggedIn()" ng-repeat="user in users">
-            <p ng-if="users.isLoggedIn()">{{users.user.full_name}}</p>
+            <li class="nav-item pull-right" ng-show="users.isLoggedIn()">
+            <p ng-if="users.isLoggedIn()">{{users.full_name}}</p>
               <a class="nav-link" href="/#" ng-click="users.disappear()" >LOG OUT</a>
             </li>
           </ul>
