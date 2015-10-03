@@ -1,105 +1,135 @@
 <div class="container" ng-controller="MovieController as films">
+
   <section class="row" ng-show="films.movie">
-    <div class="col-md-12 movie-show" >
+    <div class="col-md-9 movie-show" >
       <div class="card">
-        <img class="card-img-top film-img" ng-src="https://image.tmdb.org/t/p/w780{{films.movie.backdrop_path}}" alt="Card image cap">
-        <div class="col-lg-12 clearfix film-info" id="details">
-          <div class="col-md-8">
-            <h3><a ng-if="films.omdbmovie.Title" href="#">{{ films.omdbmovie.Title}}</a></h3>
-            <h3><a ng-if="films.omdbmovie.name" href="#">{{ films.omdbmovie.name}}</a></h3>
-            <p class="card-text "><h3>Summary:</h3>{{ films.omdbmovie.Plot }}</p>
-            <a ng-click="films.resetMovie()" class="btn btn-primary">Back</a>
-          </div>
-          <div class="col-md-4" id="sub-details">
-            <strong>Release Date: </strong><span>{{ films.movie.release_date}}</span>
-            <br>
-            <ul class="list-unstyled">
-              <li><strong>Media Type: </strong><span>{{ films.movie.media_type}}</span></li>
-              <li><strong>Popularity: </strong><span>{{ films.movie.popularity}}</span></li>
-              <li><strong>Rating: </strong><span>{{ films.movie.vote_average}}</span></li>
-              <li><strong>Language: </strong><span>{{ films.movie.original_language}}</span></li>
-            </ul>
-          </div>
-        </div>
+      <img class="card-img-top film-img" ng-src="https://image.tmdb.org/t/p/w780{{films.movie.backdrop_path}}" alt="Card image cap">
+       <tabset class="nav nav-tabs" ng-show="films.movie">
+         <tab class="nav-item nav-link " heading="Summary" >
+           <div class="col-lg-12 clearfix film-info" id="details">
+             <div class="col-md-8">
+               <h3><a ng-if="films.omdbmovie.Title" href="#">{{ films.omdbmovie.Title}}</a></h3>
+               <h3><a ng-if="films.omdbmovie.name" href="#">{{ films.omdbmovie.name}}</a></h3>
+               <p class="card-text "><h3>Summary:</h3>{{ films.omdbmovie.Plot }}</p>
+               <a ng-click="films.resetMovie()" class="btn btn-primary">Back</a>
+             </div>
+             <div class="col-md-4" id="sub-details">
+               <strong>Release Date: </strong><span>{{ films.movie.release_date}}</span>
+               <br>
+               <ul class="list-unstyled">
+                 <li><strong>Media Type: </strong><span>{{ films.movie.media_type}}</span></li>
+                 <li><strong>Popularity: </strong><span>{{ films.movie.popularity}}</span></li>
+                 <li><strong>Rating: </strong><span>{{ films.movie.vote_average}}</span></li>
+                 <li><strong>Language: </strong><span>{{ films.movie.original_language}}</span></li>
+               </ul>
+             </div>
+           </div>
+         </tab>
+         <tab class="nav-item nav-link" heading="Cast" >
+           <div class="row film-info" id="cast">
+             <figure class="pretty-figure col-md-2 col-sm-6" ng-repeat="cast in films.cast" ng-if="cast.profile_path">
+               <a href="http://mtdb.info/people/21022738-wallis-curriewood">
+                 <img data-original="http://image.tmdb.org/t/p/w342/{{cast.profile_path}}" alt="Wallis Currie-Wood" class="img-responsive" src="http://image.tmdb.org/t/p/w342/{{cast.profile_path}}"  style="display: block;">
+               </a>
+               <figcaption class="">
+                 <a href="http://mtdb.info/person/{{cast.id}}">{{cast.name}}</a>
+                 <div class="char-name">{{cast.character}}</div>
+               </figcaption>
+             </figure>
+           </div>
+         </tab>
+         <tab class="nav-item nav-link" heading="Torrents">
+           <section class="row" ng-show="films.movie">
+             <div class="col-md-12 container pull-left list-inline" ng-repeat="torrent in films.torrents">
+               <div class="card" ng-if="torrent.torrent_category != 'XXX'">
+                 <div class="card-block">
+                   <h5 class="card-title">{{ torrent.torrent_title }}</h5>
+                   <!-- <p class="card-text">Hash: {{ torrent.torrent_hash }}</p> -->
+                   <div class="row">
+                     <div class="col-sm-6">
+                       <ul>
+                        <li> <a title="Magnet link" href="{{ torrent.magnet_uri }}" class="btn btn-primary magnet"><i  src="./images/magnet.png" class="fa fa-magnet"></i> Magnet</a>
+                         <span class="seeders"><i class="fa fa-arrow-up"></i>Leechers: {{ torrent.leeches }}</span><span class="leechers"><i class="fa fa-arrow-down"></i>Seedeers: {{ torrent.seeds }}</span></li>
+                         <li><span class="advanced-info-title">Torrent upload date:</span> {{ torrent.upload_date }}</li>
+                         <li><span class="advanced-info-title">Torrent category:</span> {{ torrent.torrent_category }}</li>
+                       </ul>
+                     </div>
+                     <div class="col-sm-6">
+                       <ul>
+                         <li><span class="advanced-info-title">Download Count:</span> {{ torrent.download_count }}</li>
+                         <li><span class="advanced-info-title">Torrent size:</span> {{ torrent.size | byteFmt: 3 }}</li>
+                         <li><span class="advanced-info-title">Torrent file count:</span> {{ torrent.file_count }}</li>
+                       </ul>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </section>
+         </tab>
+         <tab class="nav-item nav-link" heading="Long Justified">Long Labeled Justified content</tab>
+       </tabset>
+     </div>
+   </div>
+  <div class="col-md-3 movie-show" ng-repeat="trailer in films.trailers">
+  <video class="col-md-12"  preload="metadata"  controls="controls" preload="metadata">
+        <source src="https://www.youtube.com/watch?v={{ trailer.key}}" type="video/mp4"  />
+      </video>
+    <img src="http://image.tmdb.org/t/p/w300/v2qjaEE0qtD4xWArfINMn992l9C.jpg" alt="" class="img-responsive img-thumbnail">
+    <img src="http://image.tmdb.org/t/p/w300/v2qjaEE0qtD4xWArfINMn992l9C.jpg" alt="" class="img-responsive img-thumbnail">
+  </div>
+
+ </section>
+
+
+
+
+ <section class="row" ng-show="!films.movie">
+  <div class="col-lg-12 row">
+    <div class="input-group search-input">
+      <input class="form-control inner" ng-change="films.onFilter(search); films.test()" type="text" ng-model="search" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 250, 'blur': 0 } }" placeholder="Search for..." />
+      <span class="input-group-btn">
+        <button class="btn btn-primary" type="button" ng-click="films.onFilter(search)">Go!</button>
+      </span>
+    </div>
+  </div>
+</section>
+
+<section class="row" ng-show="films.allMovies && !films.movie">
+  <table class="sort">
+    <tr>
+      <th>
+        <a class="btn btn-primary" href="#" ng-click="films.predicate=''">Clear</a>
+      </th>
+      <th>
+        <a class="btn btn-primary" href="" ng-click="films.order('title'); ">Title</a>
+        <span class="sortorder" ng-show="films.predicate === 'title'" ng-class="{reverse:reverse}"></span>
+      </th>
+      <th>
+        <a class="btn btn-primary" href="" ng-click="films.order('-popularity')">Popularity</a>
+        <span class="sortorder" ng-show="films.predicate === '-popularity'" ng-class="{reverse:reverse}"></span>
+      </th>
+      <th>
+        <a class="btn btn-primary" href="" ng-click="films.order('-vote_average'); ">Ratings</a>
+        <span class="sortorder" ng-show="films.predicate === '-vote_average'" ng-class="{reverse:reverse}"></span>
+      </th>
+      <th>
+        <a class="btn btn-primary" href="" ng-click="films.order('-release_date'); ">Release date</a>
+        <span class="sortorder" ng-show="films.predicate === '-release_date'" ng-class="{reverse:reverse}"></span>
+      </th>
+    </tr>
+  </table>
+</section>
+
+<section class="row" ng-show="films.allMovies && !films.movie">
+  <div class="col-md-3 pull-left list-inline card-wrap" ng-if="movie.poster_path && movie.release_date" ng-repeat="movie in films.allMovies | orderBy:films.predicate:false" >
+    <div class="card " >
+      <a href="#" ng-click="films.showMovie(movie)"><img class="card-img-top" ng-src="https://image.tmdb.org/t/p/w300{{movie.poster_path}}" alt="Card image"></a>
+      <div class="card-block">
+        <a href="#" ng-click="films.showMovie(movie)"><h6 ng-if="movie.title" class="text-center card-title">{{ movie.title}}</h6></a>
+        <h5 ng-if="movie.name" class="text-center card-title" ng-click="films.showMovie(movie)">{{ movie.name}}</h5>
       </div>
     </div>
-  </section>
-
-  <section class="row" ng-show="films.movie">
-    <div class="col-md-12 container pull-left list-inline" ng-repeat="torrent in films.torrents">
-      <div class="card ">
-        <div class="card-block">
-          <h5 class="card-title">{{ torrent.torrent_title }}</h5>
-          <!-- <p class="card-text">Hash: {{ torrent.torrent_hash }}</p> -->
-         
-          <div class="row">
-            <div class="col-sm-6">
-              <ul>
-             <li> <a title="Magnet link" href="{{ torrent.magnet_uri }}" class="btn btn-primary"><i  src="./images/magnet.png" class="fa fa-magnet"></i> Magnet</a>
-              <span class="seeders"><i class="fa fa-arrow-up"></i>Leechers: {{ torrent.leeches }}</span><span class="leechers"><i class="fa fa-arrow-down"></i>Seedeers: {{ torrent.seeds }}</span></li>
-                <li><span class="advanced-info-title">Torrent upload date:</span> {{ torrent.upload_date }}</li>
-                <li><span class="advanced-info-title">Torrent category:</span> {{ torrent.torrent_category }}</li>
-              </ul>
-            </div>
-            <div class="col-sm-6">
-              <ul>
-                <li><span class="advanced-info-title">Download Count:</span> {{ torrent.download_count }}</li>
-                <li><span class="advanced-info-title">Torrent size:</span> {{ torrent.size | byteFmt: 3 }}</li>
-                <li><span class="advanced-info-title">Torrent file count:</span> {{ torrent.file_count }}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="row" ng-show="!films.movie">
-    <div class="col-lg-12 row">
-      <div class="input-group search-input">
-        <input class="form-control inner" ng-change="films.onFilter(search); films.test()" type="text" ng-model="search" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 250, 'blur': 0 } }" placeholder="Search for..." />
-        <span class="input-group-btn">
-          <button class="btn btn-primary" type="button" ng-click="films.onFilter(search)">Go!</button>
-        </span>
-      </div>
-    </div>
-  </section>
-
-  <section class="row" ng-show="films.allMovies && !films.movie">
-    <table class="sort">
-      <tr>
-        <th>
-          <a class="btn btn-primary" href="#" ng-click="films.predicate=''">Clear</a>
-        </th>
-        <th>
-          <a class="btn btn-primary" href="" ng-click="films.order('title'); ">Title</a>
-          <span class="sortorder" ng-show="films.predicate === 'title'" ng-class="{reverse:reverse}"></span>
-        </th>
-        <th>
-          <a class="btn btn-primary" href="" ng-click="films.order('-popularity')">Popularity</a>
-          <span class="sortorder" ng-show="films.predicate === '-popularity'" ng-class="{reverse:reverse}"></span>
-        </th>
-        <th>
-          <a class="btn btn-primary" href="" ng-click="films.order('-vote_average'); ">Ratings</a>
-          <span class="sortorder" ng-show="films.predicate === '-vote_average'" ng-class="{reverse:reverse}"></span>
-        </th>
-        <th>
-          <a class="btn btn-primary" href="" ng-click="films.order('-release_date'); ">Release date</a>
-          <span class="sortorder" ng-show="films.predicate === '-release_date'" ng-class="{reverse:reverse}"></span>
-        </th>
-      </tr>
-    </table>
-  </section>
-
-  <section class="row" ng-show="films.allMovies && !films.movie">
-    <div class="col-md-3 pull-left list-inline card-wrap" ng-if="movie.poster_path && movie.release_date" ng-repeat="movie in films.allMovies | orderBy:films.predicate:false" >
-      <div class="card " >
-        <a href="#" ng-click="films.showMovie(movie)"><img class="card-img-top" ng-src="https://image.tmdb.org/t/p/w300{{movie.poster_path}}" alt="Card image"></a>
-        <div class="card-block">
-          <a href="#" ng-click="films.showMovie(movie)"><h6 ng-if="movie.title" class="text-center card-title">{{ movie.title}}</h6></a>
-          <h5 ng-if="movie.name" class="text-center card-title" ng-click="films.showMovie(movie)">{{ movie.name}}</h5>
-        </div>
-      </div>
-    </div>
-  </section>
+  </div>
+</section>
 </div>

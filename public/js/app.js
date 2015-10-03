@@ -1,16 +1,11 @@
 angular
-  .module('final-project', ['angular-jwt', 'ngResource', 'ui.router', 'ngAnimate', 'angular.filter'])
+  .module('final-project', ['angular-jwt', 'ngResource', 'ui.router', 'ngAnimate', 'angular.filter', 'ui.bootstrap'])
   .constant('API', 'https://blackbeard-mdb.herokuapp.com/api')
   .config(function($httpProvider, $sceProvider) {
     $httpProvider.interceptors.push('authInterceptor');
-
-  })
-  .config(function($sceProvider) {
-    // Completely disable SCE.  For demonstration purposes only!
-    // Do not use in new projects.
     $sceProvider.enabled(false);
   })
-  
+
   .config(MainRouter);
 
   MainRouter.$inject = ['$stateProvider', '$urlRouterProvider']

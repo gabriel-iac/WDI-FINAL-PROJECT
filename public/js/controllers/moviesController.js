@@ -8,7 +8,7 @@ angular
 })
 .config(['$compileProvider' , function ($compileProvider)
 {
-  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|file|blob|ftp|mailto|c‌​hrome-extension|magnet):/);
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|file|blob|ftp|mailto|c‌​hrome-extension|magnet|https):/);
 }]);
 
 MovieController.$inject = ["$resource", '$filter', 'TokenService', 'Movie','$state', '$stateParams', '$http','$animate'];
@@ -19,10 +19,12 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
   
   self.text = ""
   self.allMovies   = null;
-  self.predicate   = '-title';
+  self.predicate   = '-ratings';
   self.reverse     = true;
   self.letterLimit = 200;
   self.movie       = null;
+  self.cast = null;
+  self.trailers= null;
 
   self.order = function(predicate) {
     self.reverse = (self.predicate === predicate) ? !self.reverse : false;
@@ -33,6 +35,7 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
     if(input){
       Movie.search({ query: input }, function(result){
         self.allMovies = result;
+
       });
     } else {
       self.allMovies = null;
@@ -46,6 +49,30 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
       console.log(movie)
 
       var str = movie.title;
+      var id = movie.id
+
+      $http.get("https://api.themoviedb.org/3/movie/"+ id + "/videos?api_key=0bb137d978545e9b6314278018a36c59" )
+      .success(function(res) {
+        self.trailers = res.results;
+
+        console.log(self.trailers)
+      })
+      .error(function(res) {
+        self.trailers = null;
+      })
+
+
+      $http.get("https://api.themoviedb.org/3/movie/"+ id + "/credits?api_key=0bb137d978545e9b6314278018a36c59")
+      .success(function(res) {
+        self.cast = res.cast;
+
+        console.log(self.cast)
+      })
+      .error(function(res) {
+        self.cast = null;
+      })
+
+      //https://api.themoviedb.org/3/movie/550?api_key=0bb137d978545e9b6314278018a36c59
 
       $http.get("https://www.omdbapi.com/?t=" + str +"&y=&plot=full&r=json")
       .success(function(res) {
