@@ -25,6 +25,9 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
   self.movie       = null;
   self.cast = null;
   self.trailers= null;
+  self.rate= [];
+  self.max = 10;
+  self.isReadonly = true;
 
   self.order = function(predicate) {
     self.reverse = (self.predicate === predicate) ? !self.reverse : false;
@@ -35,49 +38,58 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
     if(input){
       Movie.search({ query: input }, function(result){
         self.allMovies = result;
-
-      });
-    } else {
-      self.allMovies = null;
-      input = "";
-    }  
-  }
-
-  self.showMovie = function(movie){
-    if (TokenService.isLoggedIn()) {
-      self.movie = movie;
-      console.log(movie)
-
-      var str = movie.title;
-      var id = movie.id
-
-      $http.get("https://api.themoviedb.org/3/movie/"+ id + "/videos?api_key=0bb137d978545e9b6314278018a36c59" )
-      .success(function(res) {
-        self.trailers = res.results;
-
-        console.log(self)
-      })
-      .error(function(res) {
-        self.trailers = null;
-      })
+        console.log(result)
+        
+        for (i=0; i < self.allMovies.length; i++)
+        {
+          var rating = result[i].vote_average;
+          
+          self.rate.push(rating)
 
 
-      $http.get("https://api.themoviedb.org/3/movie/"+ id + "/credits?api_key=0bb137d978545e9b6314278018a36c59")
-      .success(function(res) {
-        self.cast = res.cast;
+        }
+        console.log(self.rate)
+  });
+} else {
+  self.allMovies = null;
+  input = "";
+}  
+}
 
-        console.log(self.cast)
-      })
-      .error(function(res) {
-        self.cast = null;
-      })
+self.showMovie = function(movie){
+  if (TokenService.isLoggedIn()) {
+    self.movie = movie;
+
+    var str = movie.title;
+    var id = movie.id
+
+    $http.get("https://api.themoviedb.org/3/movie/"+ id + "/videos?api_key=0bb137d978545e9b6314278018a36c59" )
+    .success(function(res) {
+      self.trailers = res.results;
+
+
+    })
+    .error(function(res) {
+      self.trailers = null;
+    })
+
+
+    $http.get("https://api.themoviedb.org/3/movie/"+ id + "/credits?api_key=0bb137d978545e9b6314278018a36c59")
+    .success(function(res) {
+      self.cast = res.cast;
+
+      
+    })
+    .error(function(res) {
+      self.cast = null;
+    })
 
       //https://api.themoviedb.org/3/movie/550?api_key=0bb137d978545e9b6314278018a36c59
 
       $http.get("https://www.omdbapi.com/?t=" + str +"&y=&plot=full&r=json")
       .success(function(res) {
         self.omdbmovie = res;
-        console.log(self.omdbmovie)
+        
       })
       .error(function(res) {
         self.omdbmovie = null;
@@ -92,10 +104,10 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
 
       $http.get("https://getstrike.net/api/v2/torrents/search/?phrase=" + str )
       .success(function(response) {
-     
+
         if (response.torrents.length > 10){
           self.torrents = response.torrents.slice(0, 10);
-          console.log(response.torrents)
+
         }else{
           self.torrents = response.torrents
         }
@@ -122,6 +134,20 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
     }
   }
   
+    // self.hoveringOver = function(value) {
+    //   self.overStar = value;
+    //   self.percent = 100 * (value / self.max);
+    // };
+
+    // self.ratingStates = [
+    //   {stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
+    //   {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
+    //   {stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
+    //   {stateOn: 'glyphicon-heart'},
+    //   {stateOff: 'glyphicon-off'}
+    // ];
+  
+
   //keep this bits for future
   // function fadeIn(el) {
   //   el.style.opacity = 0;

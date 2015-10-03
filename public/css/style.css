@@ -307,3 +307,9 @@ ul li a.magnet{
 .torrent-list{
   margin: 0 -5px 10px 5px;
 }
+.modal-header, .modal-footer{
+  border:none;
+}
+.modal-title{
+  text-align: center;
+}

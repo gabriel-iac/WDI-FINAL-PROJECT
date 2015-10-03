@@ -118,7 +118,9 @@
       <a href="#" ng-click="films.showMovie(movie)"><img class="card-img-top" ng-src="https://image.tmdb.org/t/p/w300{{movie.poster_path}}" alt="Card image"></a>
       <div class="card-block">
         <a href="#" ng-click="films.showMovie(movie)"><h6 ng-if="movie.title" class="text-center card-title">{{ movie.title}}</h6></a>
+
         <h5 ng-if="movie.name" class="text-center card-title" ng-click="films.showMovie(movie)">{{ movie.name}}</h5>
+
       </div>
     </div>
   </div>
