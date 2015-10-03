@@ -1,5 +1,5 @@
 angular
-  .module('final-project', ['angular-jwt', 'ngResource', 'ui.router', 'ngAnimate', 'angular.filter', 'ui.bootstrap'])
+  .module('final-project', ['angular-jwt', 'ngResource', 'ui.router', 'ngAnimate', 'angular.filter', 'ui.bootstrap', 'youtube-embed'])
   .constant('API', 'https://blackbeard-mdb.herokuapp.com/api')
   .config(function($httpProvider, $sceProvider) {
     $httpProvider.interceptors.push('authInterceptor');

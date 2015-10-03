@@ -27,6 +27,7 @@
     "angular-jwt": "~0.0.9",
     "angular-resource": "~1.4.6",
     "angular-ui-router": "~0.2.15",
+    "angular-youtube-mb": "~1.1.0",
     "animate.css": "~3.4.0",
     "bootstrap": "v4.0.0-alpha",
     "jquery": "~2.1.4"

@@ -55,7 +55,7 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
       .success(function(res) {
         self.trailers = res.results;
 
-        console.log(self.trailers)
+        console.log(self)
       })
       .error(function(res) {
         self.trailers = null;
