@@ -93,7 +93,7 @@
         <a class="btn btn-primary" href="#" ng-click="films.predicate=''">Clear</a>
       </th>
       <th>
-        <a class="btn btn-primary" href="" ng-click="films.order('title'); ">Title</a>
+        <a class="btn btn-primary" href="" ng-click="films.order('-title'); ">Title</a>
         <span class="sortorder" ng-show="films.predicate === 'title'" ng-class="{reverse:reverse}"></span>
       </th>
       <th>
@@ -120,7 +120,7 @@
         <a href="#" ng-click="films.showMovie(movie)"><h6 ng-if="movie.title" class="text-center card-title">{{ movie.title}}</h6></a>
 
         <h5 ng-if="movie.name" class="text-center card-title" ng-click="films.showMovie(movie)">{{ movie.name}}</h5>
-
+     
       </div>
     </div>
   </div>

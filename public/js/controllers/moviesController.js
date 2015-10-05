@@ -11,6 +11,10 @@ angular
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|file|blob|ftp|mailto|c‌​hrome-extension|magnet|https):/);
 }]);
 
+
+
+
+
 MovieController.$inject = ["$resource", '$filter', 'TokenService', 'Movie','$state', '$stateParams', '$http','$animate'];
 
 function MovieController($resource, $filter, TokenService, Movie, $state, $stateParams, $http, $animate){
@@ -25,9 +29,15 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
   self.movie       = null;
   self.cast = null;
   self.trailers= null;
-  self.rate= [];
+  self.rate = 7;
   self.max = 10;
   self.isReadonly = true;
+  self.a = '/bower_components/Font-Awesome-SVG-PNG/black/png/16/star.png'
+  self.hoveringOver = function(value) {
+    self.overStar = value;
+    self.percent = 100 * (value / self.max);
+  };
+
 
   self.order = function(predicate) {
     self.reverse = (self.predicate === predicate) ? !self.reverse : false;
@@ -59,37 +69,29 @@ function MovieController($resource, $filter, TokenService, Movie, $state, $state
 self.showMovie = function(movie){
   if (TokenService.isLoggedIn()) {
     self.movie = movie;
-
+    console.log(self.movie)
     var str = movie.title;
     var id = movie.id
 
     $http.get("https://api.themoviedb.org/3/movie/"+ id + "/videos?api_key=0bb137d978545e9b6314278018a36c59" )
     .success(function(res) {
       self.trailers = res.results;
-
-
     })
     .error(function(res) {
       self.trailers = null;
     })
-
-
     $http.get("https://api.themoviedb.org/3/movie/"+ id + "/credits?api_key=0bb137d978545e9b6314278018a36c59")
     .success(function(res) {
       self.cast = res.cast;
-
-      
     })
     .error(function(res) {
       self.cast = null;
     })
-
       //https://api.themoviedb.org/3/movie/550?api_key=0bb137d978545e9b6314278018a36c59
-
       $http.get("https://www.omdbapi.com/?t=" + str +"&y=&plot=full&r=json")
       .success(function(res) {
         self.omdbmovie = res;
-        
+        console.log(res)
       })
       .error(function(res) {
         self.omdbmovie = null;
@@ -133,7 +135,7 @@ self.showMovie = function(movie){
       });
     }
   }
-  
+
     // self.hoveringOver = function(value) {
     //   self.overStar = value;
     //   self.percent = 100 * (value / self.max);
