@@ -269,9 +269,9 @@ ul li a.magnet{
 .video-responsive {
   border-radius: 3px;
 }
-.torrent-card{
+/*.torrent-card{
   font-size: 0.8em;
-}
+}*/
 .embed-responsive {
   position: relative;
   display: block;
@@ -313,4 +313,8 @@ ul li a.magnet{
 }
 .modal-title{
   text-align: center;
+}
+
+.torrent-card ul {
+  padding-left:0;
 }

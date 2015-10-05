@@ -10,7 +10,7 @@
              <div class="col-md-8">
                <h3><a ng-if="films.omdbmovie.Title" href="#">{{ films.omdbmovie.Title}}</a></h3>
                <h3><a ng-if="films.omdbmovie.name" href="#">{{ films.omdbmovie.name}}</a></h3>
-               <p class="card-text "><h3>Summary:</h3>{{ films.omdbmovie.Plot }}</p>
+               <p class="card-text ">{{ films.omdbmovie.Plot }}</p>
                <a ng-click="films.resetMovie()" class="btn btn-primary">Back</a>
              </div>
              <div class="col-md-4" id="sub-details">
@@ -18,9 +18,17 @@
                <br>
                <ul class="list-unstyled">
                  <li><strong>Media Type: </strong><span>{{ films.movie.media_type}}</span></li>
-                 <li><strong>Popularity: </strong><span>{{ films.movie.popularity | shortFmt: 1}}</span></li>
-                 <li><strong>Rating: </strong><span>{{ films.movie.vote_average | shortFmt: 1}}</span></li>
+                 <li><strong>Genre: </strong><span>{{ films.omdbmovie.Genre}}</span></li>
+                 <li><strong>Runtime: </strong><span>{{ films.omdbmovie.Runtime}}</span></li>
+                 <li><strong>Country: </strong><span>{{ films.omdbmovie.Country}}</span></li>
+                 <li><strong>Director: </strong><span>{{ films.omdbmovie.Director}}</span></li>
+                 <li><strong>Popularity: </strong><span>{{ films.movie.popularity | shortFmt: 3}}</span></li>
+                 <li><strong>Metascore: </strong><span>{{ films.omdbmovie.Metascore}}</span></li>
+                 <li><strong>Imdb Rating: </strong><span>{{ films.omdbmovie.imdbRating}}</span></li>
+                 <li><strong>Tmdb Rating: </strong><span>{{ films.movie.vote_average | shortFmt: 1}}</span></li>
                  <li><strong>Language: </strong><span>{{ films.movie.original_language}}</span></li>
+                 <li><strong>Awards: </strong><span>{{ films.omdbmovie.Awards}}</span></li>
+                
                </ul>
              </div>
            </div>
